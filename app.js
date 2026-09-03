@@ -624,3 +624,14 @@ load();
 render();
 listTools();
 registerTools();
+
+// `?demo=1` runs it on load, so the page can be handed to someone as a link
+// that demonstrates itself. Starts from an empty board so a shared link always
+// shows the same thing.
+if (new URLSearchParams(location.search).get("demo") === "1") {
+  board = { title: board.title, cards: [] };
+  findings = [];
+  save();
+  render();
+  setTimeout(() => runDemo(document.getElementById("demo")), 900);
+}

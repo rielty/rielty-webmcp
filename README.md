@@ -5,7 +5,9 @@
 Live: **https://rielty-move-board.netlify.app** · Data: [rielty.co.uk](https://rielty.co.uk) · Licence: MIT
 
 > **No WebMCP-capable browser to hand?** Open the live URL in anything and press
-> **▶ Watch it work**. It runs the same nine tools, in the order an agent would
+> **▶ Watch it work** — or use
+> [**?demo=1**](https://rielty-move-board.netlify.app/?demo=1), which runs it on
+> load. Either way it calls the same nine tools, in the order an agent would
 > call them, against rielty's live data — nothing is faked. To let a real agent
 > drive it, use **Chrome 149+** with `chrome://flags/#enable-webmcp-testing`, or
 > **ChatGPT's in-app browser**, which needs no flag.
