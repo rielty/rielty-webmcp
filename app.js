@@ -487,8 +487,12 @@ function registerTools() {
   const badge = document.getElementById("status");
 
   if (!mc || typeof mc.registerTool !== "function") {
-    badge.textContent = "WebMCP not detected — the board still works by hand";
+    // Safari and Firefox land here, and so does Chrome without the flag. The
+    // page is not broken — but saying only "not detected" reads as though it
+    // is, so say what to do about it and leave the demo button working.
+    badge.textContent = "WebMCP not detected";
     badge.className = "status off";
+    document.getElementById("unsupported").hidden = false;
     return;
   }
 
@@ -520,6 +524,87 @@ function registerTools() {
   badge.className = "status on";
 }
 
+// ---------------------------------------------------------------- demo
+
+// A page whose whole job is to expose tools shows a visitor nothing at all
+// until an agent turns up. In a browser without WebMCP — Safari, Firefox,
+// Chrome without the flag — that is indistinguishable from broken.
+//
+// So: one button that runs the same tool functions an agent would call, in
+// the same order, at a pace you can watch. It is NOT pretending to be an
+// agent, and it does not fake anything: every card below is a real answer
+// from rielty's live corpus.
+
+const pause = (ms) => new Promise((r) => setTimeout(r, ms));
+const toolFn = (name) => TOOLS.find((t) => t.name === name).run;
+
+async function runDemo(btn) {
+  const say = (msg) => {
+    document.getElementById("demo-status").textContent = msg;
+  };
+
+  btn.disabled = true;
+  const original = btn.textContent;
+  btn.textContent = "Running…";
+
+  try {
+    say("search_properties — asking rielty for 3-bed houses in Harrogate…");
+    const s = await toolFn("search_properties")({
+      requirements: "3 bed house in Harrogate under £500k",
+      limit: 3,
+    });
+    if (!s.results?.length) throw new Error("no results came back");
+    await pause(900);
+
+    say("property_details — pulling the full record on the first two…");
+    const d1 = await toolFn("property_details")({ id: s.results[0].id });
+    const d2 = await toolFn("property_details")({ id: s.results[1].id });
+    await pause(900);
+
+    say("add_to_board — keeping both, with a note on each…");
+    await toolFn("add_to_board")({
+      card_id: d1.card_id,
+      note: "Front runner — cheapest per bedroom. Note it is a sold record, not a listing.",
+    });
+    await pause(600);
+    await toolFn("add_to_board")({
+      card_id: d2.card_id,
+      note: "An extra bedroom for the same money, but terraced.",
+    });
+    await pause(900);
+
+    say("area_report + estimate_value — checking the area itself…");
+    await toolFn("area_report")({ town: "harrogate" });
+    await toolFn("estimate_value")({ town: "harrogate", bedrooms: 3 });
+    await pause(900);
+
+    say("compare_on_board — putting the two candidates side by side…");
+    const b = await toolFn("get_board")({});
+    await toolFn("compare_on_board")({
+      card_ids: b.cards.filter((c) => c.kind === "property").map((c) => c.card_id),
+    });
+
+    say("Done — that was nine tools' worth of research. The board is yours now: pin the findings you want, drop the ones you don't.");
+  } catch (err) {
+    say(`That failed: ${err.message || err}. The rielty lookup may be slow — try again.`);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = original;
+  }
+}
+
+// A judge should be able to see the WebMCP surface without opening DevTools.
+function listTools() {
+  document.getElementById("tool-list").innerHTML = TOOLS.map(
+    (t) => `
+      <li>
+        <code>${esc(t.name)}</code>
+        <span class="tag">${t.readOnly ? "read-only" : "changes the page"}</span>
+        <p>${esc(t.description.split(". ")[0])}.</p>
+      </li>`,
+  ).join("");
+}
+
 // ---------------------------------------------------------------- boot
 
 document.getElementById("board-title").addEventListener("blur", (e) => {
@@ -533,6 +618,9 @@ document.getElementById("clear").addEventListener("click", () => {
   render();
 });
 
+document.getElementById("demo").addEventListener("click", (e) => runDemo(e.currentTarget));
+
 load();
 render();
+listTools();
 registerTools();

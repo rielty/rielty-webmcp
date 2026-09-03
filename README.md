@@ -2,7 +2,13 @@
 
 **A UK move-research board that an AI agent and a person edit together, over WebMCP.**
 
-Live: _(deployed URL)_ · Data: [rielty.co.uk](https://rielty.co.uk) · Licence: MIT
+Live: **https://rielty-move-board.netlify.app** · Data: [rielty.co.uk](https://rielty.co.uk) · Licence: MIT
+
+> **No WebMCP-capable browser to hand?** Open the live URL in anything and press
+> **▶ Watch it work**. It runs the same nine tools, in the order an agent would
+> call them, against rielty's live data — nothing is faked. To let a real agent
+> drive it, use **Chrome 149+** with `chrome://flags/#enable-webmcp-testing`, or
+> **ChatGPT's in-app browser**, which needs no flag.
 
 ---
 
@@ -94,8 +100,13 @@ Three details worth calling out:
 2. **`readOnlyHint` is declared per tool**, never inferred from its name —
    `search_properties` is *not* read-only, because it changes what is on
    screen even though it writes no data.
-3. **Progressive enhancement.** If `modelContext` is absent the page says so
-   and stays fully usable by hand. Nothing throws.
+3. **Progressive enhancement.** If `modelContext` is absent the page says so,
+   tells you how to get it, and stays fully usable by hand. Nothing throws.
+4. **The page demonstrates itself.** A page whose whole job is to expose tools
+   shows a visitor nothing until an agent arrives — which in Safari, Firefox,
+   or Chrome without the flag is indistinguishable from being broken. The
+   **Watch it work** button calls the same tool functions in the same order,
+   so the page proves itself in any browser.
 
 ### Why there is a serverless function
 

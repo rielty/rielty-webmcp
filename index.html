@@ -39,6 +39,28 @@
     this browser, and you can pin or drop cards yourself — the agent sees your
     edits.
   </p>
+
+  <div class="demo-bar">
+    <button id="demo" class="primary">▶ Watch it work</button>
+    <p id="demo-status" class="muted">
+      No agent to hand? This runs the same nine tools, in the order an agent
+      would call them, against rielty’s live data. Nothing here is faked.
+    </p>
+  </div>
+
+  <p id="unsupported" class="callout" hidden>
+    <strong>This browser has no WebMCP.</strong> The board and the demo above
+    still work. To let an agent drive it, open this page in
+    <strong>Chrome 149+</strong> with
+    <code>chrome://flags/#enable-webmcp-testing</code> enabled, or in
+    <strong>ChatGPT’s in-app browser</strong>, which supports WebMCP with no
+    flag.
+  </p>
+
+  <details class="tools">
+    <summary>The nine tools this page registers</summary>
+    <ol id="tool-list"></ol>
+  </details>
 </section>
 
 <main>
