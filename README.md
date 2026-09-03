@@ -182,6 +182,10 @@ are the whole application.
 ## Related
 
 rielty publishes these same four tools as a conventional MCP server at
-`https://rielty.co.uk/mcp/v1` ([docs](https://rielty.co.uk/mcp)), and runs
-WebMCP in its own product surface too. This repository is the standalone,
+`https://rielty.co.uk/mcp/v1` ([docs](https://rielty.co.uk/mcp)) — that is the
+endpoint this app's serverless function calls, and it is live today. The same
+nine-tool WebMCP layer has also been built into rielty's own Phoenix/LiveView
+app and verified in Chrome, but that branch is **not yet deployed to
+production**, so rielty.co.uk itself does not serve WebMCP right now. This
+repository is the standalone,
 open-source demonstration of what the browser half makes possible.
