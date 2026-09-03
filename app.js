@@ -125,7 +125,7 @@ function cardBody(c) {
     return `
       <p class="muted">${esc(c.count ?? 0)} matched · showing ${esc((c.results || []).length)}</p>
       <ul class="rows">${rows}</ul>
-      ${c.note ? `<p class="note">${esc(c.note)}</p>` : ""}`;
+      ${c.sourceNote ? `<p class="note">${esc(c.sourceNote)}</p>` : ""}`;
   }
 
   if (c.kind === "property") {
@@ -276,7 +276,9 @@ const TOOLS = [
         title: requirements.slice(0, 70),
         count: r.count,
         results: r.results || [],
-        note: r.note,
+        // NOT `note`: that field is the agent's own annotation, rendered
+        // separately by cardHtml. Reusing it printed rielty's caveat twice.
+        sourceNote: r.note,
       });
       return { ok: true, card_id: id, count: r.count, returned: (r.results || []).length, results: r.results || [] };
     },
