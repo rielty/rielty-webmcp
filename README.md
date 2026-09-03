@@ -57,9 +57,20 @@ five**, because they act on a surface the person is looking at, in their
 browser, in their session. There is nothing to authenticate and no state to
 sync — the board is simply *there*, for both of you.
 
+## Where is the chat box?
+
+There isn't one, and that is the point. **The agent is not in the page — it is
+whatever is browsing it.** Open this page inside ChatGPT's in-app browser and
+type into ChatGPT as you normally would; it discovers the nine tools this page
+publishes and calls them while you watch. The page is a surface an agent acts
+on, not an app with an assistant bolted into the corner.
+
+That is also why `?demo=1` and the **Watch it work** button exist: without an
+agent present there is nothing to see, which looks broken rather than empty.
+
 ## What this makes possible that wasn't before
 
-Ask your agent:
+Inside ChatGPT's in-app browser, ask:
 
 > "I'm moving to Yorkshire on a £400k budget, 3 beds minimum. Research it and
 > keep the three best on the board, with a note on each explaining the catch."
