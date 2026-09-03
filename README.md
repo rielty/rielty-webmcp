@@ -2,7 +2,9 @@
 
 **A UK move-research board that an AI agent and a person edit together, over WebMCP.**
 
-Live: **https://rielty-move-board.netlify.app** · Data: [rielty.co.uk](https://rielty.co.uk) · Licence: MIT
+Live: **https://rielty-move-board.netlify.app** ·
+Demo video: **https://youtu.be/iKehx9y6mdY** ·
+Data: [rielty.co.uk](https://rielty.co.uk) · Licence: MIT
 
 > **No WebMCP-capable browser to hand?** Open the live URL in anything and press
 > **▶ Watch it work** — or use
