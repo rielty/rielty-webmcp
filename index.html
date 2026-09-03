@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Move Board — research a UK move with an agent</title>
+<meta name="description" content="A UK move-research board that an AI agent and a person edit together, over WebMCP. Real sold-price data from rielty.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>📋</text></svg>">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <span class="mark">📋</span>
+    <div>
+      <strong>Move Board</strong>
+      <span class="sub">UK move research, shared with an agent</span>
+    </div>
+  </div>
+  <div class="right">
+    <span id="status" class="status">checking…</span>
+  </div>
+</header>
+
+<section class="intro">
+  <p>
+    This page hands an AI agent <strong>nine tools</strong> over
+    <a href="https://github.com/webmachinelearning/webmcp" target="_blank" rel="noopener">WebMCP</a>.
+    Four of them look things up in
+    <a href="https://rielty.co.uk" target="_blank" rel="noopener">rielty</a>’s
+    public property corpus — 15.79M UK sold-price records. Five of them edit
+    this board. Ask your agent something like
+    <em>“I’m moving to Yorkshire on a £400k budget, 3 beds minimum — research it
+    and keep the three best on the board, with a note on each.”</em>
+  </p>
+  <p class="muted">
+    Findings turn over as the agent works. The board is yours: it persists in
+    this browser, and you can pin or drop cards yourself — the agent sees your
+    edits.
+  </p>
+</section>
+
+<main>
+  <section class="col">
+    <h2>Findings <span class="hint">what the agent just looked up</span></h2>
+    <div id="findings" class="cards"></div>
+  </section>
+
+  <section class="col board-col">
+    <h2>
+      <span id="board-title" contenteditable="true" spellcheck="false">My move</span>
+      <span class="hint"><span id="pin-count">0</span> pinned · click the title to rename</span>
+      <button id="clear" class="ghost" title="Remove every pinned card">Clear</button>
+    </h2>
+    <div id="board" class="cards"></div>
+  </section>
+</main>
+
+<footer>
+  <p>
+    Open source ·
+    <a href="https://github.com/rielty/rielty-webmcp" target="_blank" rel="noopener">github.com/rielty/rielty-webmcp</a>
+    · data from <a href="https://rielty.co.uk" target="_blank" rel="noopener">rielty.co.uk</a>,
+    which publishes the same four tools over
+    <a href="https://rielty.co.uk/mcp" target="_blank" rel="noopener">MCP</a>.
+  </p>
+  <p class="muted">
+    Sold-price records are historic transactions, not homes for sale. Estimates
+    are statistical, from local sales — not a valuation of any specific address.
+  </p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

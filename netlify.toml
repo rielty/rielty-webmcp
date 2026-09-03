@@ -1,0 +1,16 @@
+# Static page at the root, one function beside it. No build step, no bundler —
+# what is in this repo is what runs.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+  command = ""
+
+# The function declares its own route (`export const config = { path: "/api/mcp" }`
+# in netlify/functions/mcp.mjs), so there is no redirect to keep in sync here.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
